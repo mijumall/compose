@@ -35,3 +35,16 @@ services:
     volumes:
       - ./volumes/flutter/:/workspace/project/lib/
     command: flutter run -d web-server --web-hostname 0.0.0.0 --web-port 4001
+
+  mongodb:
+    container_name: mongodb
+    hostname: mongodb
+    image: mongodb:sample
+    build:
+      context: ./Dockerfiles/
+      dockerfile: mongodb.Dockerfile 
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./volumes/mongodb:/workspace
+    command: mongod -f /workspace/mongod.conf
